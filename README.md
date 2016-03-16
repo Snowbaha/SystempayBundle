@@ -39,14 +39,22 @@ public function registerBundles()
 ```
 
 ### Step 3 : Configure the bundle
-Mandatory fields :
+Mandatory fields PARAMETER:
+```yaml
+# Systempay
+    systempay_id: ~
+    systempay_certif_test: ~
+    systempay_certif_prod: ~
+```
+
+Mandatory fields CONFIG :
 ```yaml
 snow_systempay:
     # Credentials
-    site_id: XXXXX
+    site_id: "%systempay_id%"
     # Keys
-    key_dev: XXXXX
-    key_prod: XXXXX
+    key_dev: "%systempay_certif_test%"
+    key_prod: "%systempay_certif_prod%"
     # Return
     url_return: http://www.example.com/payment_return
 ```

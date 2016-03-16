@@ -23,7 +23,7 @@ class SnowSystempayExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config as $parameter => $value)
-            $container->setParameter(sprintf('Snow_systempay.%s', $parameter), $value);
+            $container->setParameter(sprintf('snow_systempay.%s', $parameter), $value);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

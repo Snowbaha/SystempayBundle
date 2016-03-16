@@ -124,9 +124,11 @@ class SystemPay
                 else :
                     $retour['statut'] = $query['vads_trans_status'];
                 endif;
+            }else{
+                $this->writeLog( "Fail check signature with id_trans : ".$retour['id_trans'] );
             }
         }else{
-            $this->writeLog( "fail check signature with id_trans : ".$retour['id_trans'] );
+            $this->writeLog( "Empty signature with id_trans : ".$retour['id_trans']." [[".json_encode($query) );
         }
         return $retour;
     }
@@ -164,8 +166,8 @@ class SystemPay
         $contenu_signature = "";
         foreach ($fields as $field => $value)
             $contenu_signature .= $value."+";
-        $contenu_signature .= $this->key;
-        $signature = sha1($contenu_signature);
+            $contenu_signature .= $this->key;
+            $signature = sha1($contenu_signature);
         return $signature;
     }
 

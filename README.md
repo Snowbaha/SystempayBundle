@@ -41,7 +41,7 @@ public function registerBundles()
 ### Step 3 : Configure the bundle
 Mandatory fields :
 ```yaml
-tlconseil_systempay:
+snow_systempay:
     # Credentials
     site_id: XXXXX
     # Keys
@@ -72,7 +72,7 @@ Optionnal fields (here the fields have their default values) :
 ## How to use
 ### Controller
 #### Create a Transaction
-To intantiate a new Transaction, you need to create an action in one of your controller and call the `tlconseil_systempay` serivce. All mandatory fields are used with their default value. You can configure all the common fields of your transactions in the `app/config/config.yml` file.
+To intantiate a new Transaction, you need to create an action in one of your controller and call the `snow_systempay` serivce. All mandatory fields are used with their default value. You can configure all the common fields of your transactions in the `app/config/config.yml` file.
 
 To see what fields are available see : [Systempay Documentation](https://www.ocl.natixis.com/systempay/public/uploads/fichier/Guide_d%27implementation_Formulaire_de_paiement08022016164906.pdf) (Chapter 2.3.1)
 
@@ -89,7 +89,7 @@ To see what fields are available see : [Systempay Documentation](https://www.ocl
     public function payOnlineAction($id)
     {
         // ...
-        $systempay = $this->get('tlconseil.systempay')
+        $systempay = $this->get('snow.systempay')
             ->init()
             ->setOptionnalFields(array(
                 'shop_url' => 'http://www.example.com'
@@ -118,7 +118,7 @@ This route will be called by the Systempay service to update you about the payme
     public function paymentVerificationAction(Request $request)
     {
         // ...
-        $this->get('tlconseil.systempay')
+        $this->get('snow.systempay')
             ->responseHandler($request)
         ;
 

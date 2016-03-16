@@ -37,7 +37,7 @@ class TwigExtension extends Twig_Extension
      */
     public function systempayForm(Twig_Environment $twig, $fields)
     {
-        $form_html = $twig->render('SnowSystempayBundle:::form.html.twig', array('fields' => $fields));
+        $form_html = $twig->render('SnowSystempayBundle:Systempay:form.html.twig', array('fields' => $fields));
 
         return $form_html;
     }

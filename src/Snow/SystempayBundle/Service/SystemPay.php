@@ -101,13 +101,15 @@ class SystemPay
     /**
      * Check the verification from the bank server
      * @param Request $request
-     * @return null|String
+     * @return Array
      */
     public function responseHandler(Request $request)
     {
         $query = $request->request->all();
 
-        $statut = null;
+        $retour['statut'] = "???";
+        $retour['id_trans'] = $query['vads_trans_id'];
+
         // Check signature
         if (!empty($query['signature']))
         {
@@ -118,13 +120,15 @@ class SystemPay
                 $this->writeLog( json_encode($query) );
 
                 if ($query['vads_trans_status'] == "AUTHORISED") :
-                    $statut = "ok";
+                    $retour['statut'] = "ok";
                 else :
-                    $statut = $query['vads_trans_status'];
+                    $retour['statut'] = $query['vads_trans_status'];
                 endif;
             }
+        }else{
+            $this->writeLog( "fail check signature with id_trans : ".$retour['id_trans'] );
         }
-        return $statut;
+        return $retour;
     }
 
     /**

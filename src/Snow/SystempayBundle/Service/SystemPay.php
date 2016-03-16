@@ -2,10 +2,9 @@
 
 namespace Snow\SystempayBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
-use Snow\SystempayBundle\Entity\Transaction;
+
 
 /**
  * Class SystemPay
@@ -38,16 +37,21 @@ class SystemPay
      */
     private $key;
 
+    protected $logger;
 
     public function __construct(Container $container)
     {
+        $this->logger = $container->get("snow.systempay.logger");
 
-        foreach ($this->mandatoryFields as $field => $value)
+        foreach ($this->mandatoryFields as $field => $value) :
             $this->mandatoryFields[$field] = $container->getParameter(sprintf('snow_systempay.%s', $field));
-        if ($this->mandatoryFields['ctx_mode'] == "TEST")
+        endforeach;
+
+        if ($this->mandatoryFields['ctx_mode'] == "TEST") :
             $this->key = $container->getParameter('snow_systempay.key_dev');
-        else
+        else :
             $this->key = $container->getParameter('snow_systempay.key_prod');
+        endif;
 
     }
 
@@ -95,13 +99,15 @@ class SystemPay
     }
 
     /**
+     * Check the verification from the bank server
      * @param Request $request
-     * @return bool
+     * @return null|String
      */
     public function responseHandler(Request $request)
     {
         $query = $request->request->all();
 
+        $statut = null;
         // Check signature
         if (!empty($query['signature']))
         {
@@ -109,17 +115,16 @@ class SystemPay
             unset ($query['signature']);
             if ($signature == $this->getSignature($query))
             {
-                $transaction = new Transaction(); // $query['vads_trans_id']
-                $transaction->setStatus($query['vads_trans_status']);
-                if ($query['vads_trans_status'] == "AUTHORISED")
-                $transaction->setPaid(true);
-                $transaction->setUpdatedAt(new \DateTime());
-                $transaction->setLogResponse(json_encode($query));
+                $this->writeLog( json_encode($query) );
 
-                return $transaction;
+                if ($query['vads_trans_status'] == "AUTHORISED") :
+                    $statut = "ok";
+                else :
+                    $statut = $query['vads_trans_status'];
+                endif;
             }
         }
-        return null;
+        return $statut;
     }
 
     /**
@@ -154,7 +159,7 @@ class SystemPay
         ksort($fields);
         $contenu_signature = "";
         foreach ($fields as $field => $value)
-                $contenu_signature .= $value."+";
+            $contenu_signature .= $value."+";
         $contenu_signature .= $this->key;
         $signature = sha1($contenu_signature);
         return $signature;
@@ -166,7 +171,6 @@ class SystemPay
      */
     public function writeLog($string)
     {
-        $logger = $this->container->get("snow.systempay.logger");
-        $logger->info("INFO write".$string);
+        $this->logger->info($string);
     }
 }

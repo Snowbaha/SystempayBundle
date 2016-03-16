@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('page_action')->defaultValue('PAYMENT')->end()
             ->scalarNode('action_mode')->defaultValue('INTERACTIVE')->end()
             ->scalarNode('payment_config')->defaultValue('SINGLE')->end()
-            ->scalarNode('version')->defaultValue('V2')->end()
+            ->scalarNode('version')->defaultValue('V2')->end() //Version du protocole d’échange
             ->scalarNode('language')->defaultValue('fr')->end()
             ->scalarNode('redirect_success_timeout')->defaultValue('1')->end()
             ->scalarNode('redirect_success_message')->defaultValue('Redirection vers la boutique dans quelques instants')->end()

@@ -2,8 +2,10 @@
 
 namespace Snow\SystempayBundle\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFunction;
+use \Twig_Extension;
+use \Twig_SimpleFunction;
+use \Twig_Environment;
+
 
 /**
  * Class TwigExtension
@@ -27,10 +29,10 @@ class TwigExtension extends Twig_Extension
      */
     public function systempayForm($fields)
     {
-        $inputs = '';
-        foreach ($fields as $field => $value)
-            $inputs .= sprintf('<input type="hidden" name="%s" value="%s">', $field, $value);
-        return $inputs;
+        $twig = new Twig_Environment();
+        $form_html = $twig->render('SnowSystempayBundle:Systempay:form.html.twig', array('fields' => $fields));
+
+        return $form_html;
     }
 
     /**

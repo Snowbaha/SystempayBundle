@@ -38,19 +38,16 @@ class SystemPay
      */
     private $key;
 
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
+
 
     /**
      * @var Transaction
      */
     private $transaction;
 
-    public function __construct(EntityManager $entityManager, Container $container)
+    public function __construct(Container $container)
     {
-        $this->entityManager = $entityManager;
+
         foreach ($this->mandatoryFields as $field => $value)
             $this->mandatoryFields[$field] = $container->getParameter(sprintf('snow_systempay.%s', $field));
         if ($this->mandatoryFields['ctx_mode'] == "TEST")
@@ -75,8 +72,7 @@ class SystemPay
         $transaction->setPaid(false);
         $transaction->setRefunded(false);
         $transaction->setStatus("");
-        /*$this->entityManager->persist($transaction);
-        $this->entityManager->flush();*/
+
         return $transaction;
     }
 
@@ -104,7 +100,6 @@ class SystemPay
      * @param $fields
      * remove "vads_" prefix and form an array that will looks like :
      * trans_id => x
-     * cust_email => xxxxxx@xx.xx
      * @return $this
      */
     public function setOptionnalFields($fields)
@@ -139,17 +134,17 @@ class SystemPay
             unset ($query['signature']);
             if ($signature == $this->getSignature($query))
             {
-                $transaction = $this->entityManager->getRepository('SnowSystempayBundle:Transaction')->find($query['vads_trans_id']);
+                $transaction = new Transaction(); // $query['vads_trans_id']
                 $transaction->setStatus($query['vads_trans_status']);
                 if ($query['vads_trans_status'] == "AUTHORISED")
-                    $transaction->setPaid(true);
+                $transaction->setPaid(true);
                 $transaction->setUpdatedAt(new \DateTime());
                 $transaction->setLogResponse(json_encode($query));
-                $this->entityManager->flush();
-                return true;
+
+                return $transaction;
             }
         }
-        return false;
+        return null;
     }
 
     /**

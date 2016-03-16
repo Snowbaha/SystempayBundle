@@ -2,7 +2,7 @@ services:
 
     snow.systempay:
         class: Snow\SystempayBundle\Service\SystemPay
-        arguments: [@doctrine.orm.entity_manager, @service_container]
+        arguments: [@service_container]
 
     snow.systempay.twig_extension:
         class: Snow\SystempayBundle\Twig\TwigExtension

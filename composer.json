@@ -1,7 +1,6 @@
 {
     "name": "snowbaha/systempay-bundle",
     "description": "Payment gateway for Banque Populaire and Caisse d'épargne.",
-    "version": "0.3.1",
     "type": "symfony-bundle",
     "require": {
         "php": ">=5.4.0"

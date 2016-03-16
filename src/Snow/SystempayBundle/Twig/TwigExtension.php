@@ -19,7 +19,14 @@ class TwigExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction('systempayForm', array($this, 'systempayForm')),
+            new Twig_SimpleFunction(
+                'systempayForm',
+                array($this, 'systempayForm'),
+                array(
+                    'is_safe' => array('html'),
+                    'needs_environment' => true
+                )
+            ),
         );
     }
 
@@ -30,7 +37,7 @@ class TwigExtension extends Twig_Extension
     public function systempayForm($fields)
     {
         $twig = new Twig_Environment();
-        $form_html = $twig->render('SnowSystempayBundle:Systempay:form.html.twig', array('fields' => $fields));
+        $form_html = $twig->render('SnowSystempayBundle:::form.html.twig', array('fields' => $fields));
 
         return $form_html;
     }

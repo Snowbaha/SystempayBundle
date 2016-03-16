@@ -125,10 +125,10 @@ class SystemPay
                     $retour['statut'] = $query['vads_trans_status'];
                 endif;
             }else{
-                $this->writeLog( "Fail check signature with id_trans : ".$retour['id_trans'] );
+                $this->writeErrorLog( "Fail check signature with id_trans : [".$retour['id_trans']."] ".json_encode($query) );
             }
         }else{
-            $this->writeLog( "Empty signature with id_trans : ".$retour['id_trans']." [[".json_encode($query) );
+            $this->writeErrorLog( "Empty signature with id_trans : [".$retour['id_trans']."] ".json_encode($query) );
         }
         return $retour;
     }
@@ -172,11 +172,20 @@ class SystemPay
     }
 
     /**
-     * Write element in a specifig log to Systempay
+     * Write INFO element in a specifig log to Systempay
      * @param $string
      */
     public function writeLog($string)
     {
         $this->logger->info($string);
+    }
+
+    /**
+     * Write ERROR in the log to systempay
+     * @param $string
+     */
+    public function writeErrorLog($string)
+    {
+        $this->logger->error($string);
     }
 }

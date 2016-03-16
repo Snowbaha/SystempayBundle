@@ -39,12 +39,6 @@ class SystemPay
     private $key;
 
 
-
-    /**
-     * @var Transaction
-     */
-    private $transaction;
-
     public function __construct(Container $container)
     {
 
@@ -58,25 +52,7 @@ class SystemPay
     }
 
     /**
-     * @param $currency
-     * @param $amount
-     * @return Transaction
-     */
-    private function newTransaction($currency, $amount)
-    {
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        $transaction->setCurrency($currency);
-        $transaction->setCreatedAt(new \DateTime());
-        $transaction->setUpdatedAt(new \DateTime());
-        $transaction->setPaid(false);
-        $transaction->setRefunded(false);
-        $transaction->setStatus("");
-
-        return $transaction;
-    }
-
-    /**
+     * @param int $id_transaction
      * @param int $currency
      * Euro => 978
      * US Dollar => 840
@@ -86,12 +62,11 @@ class SystemPay
      * 95 € = 9500
      * @return $this
      */
-    public function init($currency = 978, $amount = 1000)
+    public function init($id_transaction, $currency = 978, $amount = 1000)
     {
-        $this->transaction = $this->newTransaction($currency, $amount);
         $this->mandatoryFields['amount'] = $amount;
         $this->mandatoryFields['currency'] = $currency;
-        $this->mandatoryFields['trans_id'] = sprintf('%06d', $this->transaction->getId());
+        $this->mandatoryFields['trans_id'] = $id_transaction;
         $this->mandatoryFields['trans_date'] = gmdate('YmdHis');
         return $this;
     }

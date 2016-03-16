@@ -109,6 +109,7 @@ class SystemPay
 
         $retour['statut'] = "???";
         $retour['id_trans'] = $query['vads_trans_id'];
+        $retour['amount'] = $query['vads_amount'];
 
         // Check signature
         if (!empty($query['signature']))

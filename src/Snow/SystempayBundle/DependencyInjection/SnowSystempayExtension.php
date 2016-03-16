@@ -1,6 +1,6 @@
 <?php
 
-namespace Tlconseil\SystempayBundle\DependencyInjection;
+namespace Snow\SystempayBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class TlconseilSystempayExtension extends Extension
+class SnowSystempayExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -23,7 +23,7 @@ class TlconseilSystempayExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config as $parameter => $value)
-            $container->setParameter(sprintf('tlconseil_systempay.%s', $parameter), $value);
+            $container->setParameter(sprintf('Snow_systempay.%s', $parameter), $value);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

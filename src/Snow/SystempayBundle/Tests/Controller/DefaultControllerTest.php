@@ -1,6 +1,6 @@
 <?php
 
-namespace Tlconseil\SystempayBundle\Tests\Controller;
+namespace Snow\SystempayBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

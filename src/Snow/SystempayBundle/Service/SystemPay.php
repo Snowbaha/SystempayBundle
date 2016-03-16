@@ -1,15 +1,15 @@
 <?php
 
-namespace Tlconseil\SystempayBundle\Service;
+namespace Snow\SystempayBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
-use Tlconseil\SystempayBundle\Entity\Transaction;
+use Snow\SystempayBundle\Entity\Transaction;
 
 /**
  * Class SystemPay
- * @package Tlconseil\SystempayBundle\Service
+ * @package Snow\SystempayBundle\Service
  */
 class SystemPay
 {
@@ -52,11 +52,11 @@ class SystemPay
     {
         $this->entityManager = $entityManager;
         foreach ($this->mandatoryFields as $field => $value)
-            $this->mandatoryFields[$field] = $container->getParameter(sprintf('tlconseil_systempay.%s', $field));
+            $this->mandatoryFields[$field] = $container->getParameter(sprintf('Snow_systempay.%s', $field));
         if ($this->mandatoryFields['ctx_mode'] == "TEST")
-            $this->key = $container->getParameter('tlconseil_systempay.key_dev');
+            $this->key = $container->getParameter('Snow_systempay.key_dev');
         else
-            $this->key = $container->getParameter('tlconseil_systempay.key_prod');
+            $this->key = $container->getParameter('Snow_systempay.key_prod');
 
     }
 
@@ -139,7 +139,7 @@ class SystemPay
             unset ($query['signature']);
             if ($signature == $this->getSignature($query))
             {
-                $transaction = $this->entityManager->getRepository('TlconseilSystempayBundle:Transaction')->find($query['vads_trans_id']);
+                $transaction = $this->entityManager->getRepository('SnowSystempayBundle:Transaction')->find($query['vads_trans_id']);
                 $transaction->setStatus($query['vads_trans_status']);
                 if ($query['vads_trans_status'] == "AUTHORISED")
                     $transaction->setPaid(true);

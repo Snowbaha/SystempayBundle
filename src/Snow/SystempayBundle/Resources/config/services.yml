@@ -1,0 +1,10 @@
+services:
+
+    Snow.systempay:
+        class: Snow\SystempayBundle\Service\SystemPay
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+
+    Snow.systempay.twig_extension:
+        class: Snow\SystempayBundle\Twig\TwigExtension
+        tags:
+            - { name: twig.extension }

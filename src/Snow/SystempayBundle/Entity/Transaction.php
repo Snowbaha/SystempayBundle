@@ -1,6 +1,6 @@
 <?php
 
-namespace Tlconseil\SystempayBundle\Entity;
+namespace Snow\SystempayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

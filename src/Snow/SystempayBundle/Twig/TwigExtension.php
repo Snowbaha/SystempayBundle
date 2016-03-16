@@ -1,13 +1,13 @@
 <?php
 
-namespace Tlconseil\SystempayBundle\Twig;
+namespace Snow\SystempayBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 /**
  * Class TwigExtension
- * @package Tlconseil\SystempayBundle\Twig
+ * @package Snow\SystempayBundle\Twig
  */
 class TwigExtension extends Twig_Extension
 {

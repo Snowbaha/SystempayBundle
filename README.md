@@ -1,11 +1,15 @@
-# SystempayBundle
+# SystempayBundle 
+
+Fork from : https://github.com/baptiste-dulac/SystempayBundle
+(My first fork try ;)
+
 This bundle allows to implement a Payment Solution working with [SystemPay](https://paiement.systempay.fr/html/) for your symfony projet.
 This payment solution uses Systempay. Systempay is a payment gateway proposed by the following bank companies :
 * Banque Populaire (Cyberplus)
 * Caisse d'épargne (SPPlus)
 
-[![Total Downloads](https://poser.pugx.org/baptiste-dulac/systempay-bundle/downloads.svg)](https://packagist.org/packages/baptiste-dulac/systempay-bundle)
-[![Latest Stable Version](https://poser.pugx.org/baptiste-dulac/systempay-bundle/v/stable.svg)](https://packagist.org/packages/baptiste-dulac/systempay-bundle)
+[![Total Downloads](https://poser.pugx.org/snowbaha/systempay-bundle/downloads.svg)](https://packagist.org/packages/snowbaha/systempay-bundle)
+[![Latest Stable Version](https://poser.pugx.org/snowbaha/systempay-bundle/v/stable.svg)](https://packagist.org/packages/snowbaha/systempay-bundle)
 
 
 ## Installation
@@ -14,7 +18,7 @@ Using composer :
 ```json
 {
     "require": {
-        "baptiste-dulac/systempay-bundle": "master"
+        "snowbaha/systempay-bundle": "master"
     }
 }
 ```
@@ -29,7 +33,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Tlconseil\SystempayBundle\TlconseilSystempayBundle(),
+        new Snow\SystempayBundle\SnowSystempayBundle(),
     );
 }
 ```
@@ -70,7 +74,7 @@ Optionnal fields (here the fields have their default values) :
 #### Create a Transaction
 To intantiate a new Transaction, you need to create an action in one of your controller and call the `tlconseil_systempay` serivce. All mandatory fields are used with their default value. You can configure all the common fields of your transactions in the `app/config/config.yml` file.
 
-To see what fields are available see : [Systempay Documentation](https://www.ocl.natixis.com/systempay/public/uploads/fichier/Guide_d%27implementation_formulaire_Paiement20122013163915.pdf) (Chapter 2.3.1)
+To see what fields are available see : [Systempay Documentation](https://www.ocl.natixis.com/systempay/public/uploads/fichier/Guide_d%27implementation_Formulaire_de_paiement08022016164906.pdf) (Chapter 2.3.1)
 
 ##### Service Method
 * `init($currency = 978, $amount = 1000)` allows you to specify the amount and the currency of the transaction.

@@ -8,3 +8,13 @@ services:
         class: Snow\SystempayBundle\Twig\TwigExtension
         tags:
             - { name: twig.extension }
+
+    snow.systempay.logger:
+        class:     Symfony\Bridge\Monolog\Logger
+        arguments: [app]
+        calls:
+            - [pushHandler, ["@snow.systempay.logger_handler"]]
+
+    snow.systempay.logger_handler:
+        class:     Monolog\Handler\StreamHandler
+        arguments: [%kernel.logs_dir%/%kernel.environment%.systempay.log, 200]

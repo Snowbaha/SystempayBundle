@@ -130,13 +130,6 @@ class SystemPay
         return $this->paymentUrl;
     }
 
-    /**
-     * @return Transaction
-     */
-    public function getTransaction()
-    {
-        return $this->transaction;
-    }
 
     /**
      * @param array $fields
@@ -165,5 +158,15 @@ class SystemPay
         $contenu_signature .= $this->key;
         $signature = sha1($contenu_signature);
         return $signature;
+    }
+
+    /**
+     * Write element in a specifig log to Systempay
+     * @param $string
+     */
+    public function writeLog($string)
+    {
+        $logger = $this->container->get("snow.systempay.logger");
+        $logger->info("INFO write".$string);
     }
 }

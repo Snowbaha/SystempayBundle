@@ -16,7 +16,7 @@ class TwigExtension extends Twig_Extension
     /**
      * @return array
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return array(
             new Twig_SimpleFunction(
@@ -31,12 +31,12 @@ class TwigExtension extends Twig_Extension
     }
 
     /**
+     * @param Twig_Environment $twig  // allow to use the render (param in getFunctions() are very important!)
      * @param $fields
-     * @return string
+     * @return mixed
      */
-    public function systempayForm($fields)
+    public function systempayForm(Twig_Environment $twig, $fields)
     {
-        $twig = new Twig_Environment();
         $form_html = $twig->render('SnowSystempayBundle:::form.html.twig', array('fields' => $fields));
 
         return $form_html;

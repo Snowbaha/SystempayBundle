@@ -104,10 +104,10 @@ To see what fields are available see : [Systempay Documentation](https://www.ocl
             ))
         ;
 
-        return array(
-            'paymentUrl' => $systempay->getPaymentUrl(),
-            'fields' => $systempay->getResponse(),
-        );
+        return $this->render('YOURBUNDLEBundle:Systempay:formToSend.html.twig', array(
+                    'paymentUrl' => $systempay->getPaymentUrl(),
+                    'fields' => $systempay->getResponse(),
+                ));
     }
 ```
 #### Handle the response from the server
@@ -143,7 +143,12 @@ This is how the template for the `payOnlineAction()` may look like. You can use 
                 <i class="fa fa-refresh fa-spin margin-top margin-bottom" style="font-size: 50px"></i>
                 <h3>Redirection vers la page de paiement en cours...</h3>
                 <form action="{{ paymentUrl }}" method="POST" id="systempay-form">
-                    {{ systempayForm(fields) | raw }}
+                    {{ systempayForm(fields) }}
+
+                    {# If no JS, show the button to submit#}
+                    <noscript>
+                        <input type="submit" value="Pay">
+                    </noscript>
                 </form>
             </div>
         </div>

@@ -16,7 +16,7 @@ class TwigExtension extends Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions()
+    public function getFilters()
     {
         return array(
             new Twig_SimpleFunction(

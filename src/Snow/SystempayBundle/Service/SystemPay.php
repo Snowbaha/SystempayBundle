@@ -52,11 +52,11 @@ class SystemPay
     {
         $this->entityManager = $entityManager;
         foreach ($this->mandatoryFields as $field => $value)
-            $this->mandatoryFields[$field] = $container->getParameter(sprintf('Snow_systempay.%s', $field));
+            $this->mandatoryFields[$field] = $container->getParameter(sprintf('snow_systempay.%s', $field));
         if ($this->mandatoryFields['ctx_mode'] == "TEST")
-            $this->key = $container->getParameter('Snow_systempay.key_dev');
+            $this->key = $container->getParameter('snow_systempay.key_dev');
         else
-            $this->key = $container->getParameter('Snow_systempay.key_prod');
+            $this->key = $container->getParameter('snow_systempay.key_prod');
 
     }
 
@@ -75,8 +75,8 @@ class SystemPay
         $transaction->setPaid(false);
         $transaction->setRefunded(false);
         $transaction->setStatus("");
-        $this->entityManager->persist($transaction);
-        $this->entityManager->flush();
+        /*$this->entityManager->persist($transaction);
+        $this->entityManager->flush();*/
         return $transaction;
     }
 

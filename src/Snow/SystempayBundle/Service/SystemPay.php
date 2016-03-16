@@ -53,20 +53,20 @@ class SystemPay
 
     /**
      * @param int $id_transaction
-     * @param int $currency
-     * Euro => 978
-     * US Dollar => 840
      * @param int $amount
      * Use int :
      * 10,28 € = 1028
      * 95 € = 9500
+     * @param int $currency
+     * Euro => 978
+     * US Dollar => 840
      * @return $this
      */
-    public function init($id_transaction, $currency = 978, $amount = 1000)
+    public function init($id_transaction, $amount, $currency = 978)
     {
         $this->mandatoryFields['amount'] = $amount;
         $this->mandatoryFields['currency'] = $currency;
-        $this->mandatoryFields['trans_id'] = $id_transaction;
+        $this->mandatoryFields['trans_id'] = sprintf('%06d', $id_transaction); // need 6 digit number (empty space with 0)
         $this->mandatoryFields['trans_date'] = gmdate('YmdHis');
         return $this;
     }

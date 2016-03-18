@@ -1,16 +1,11 @@
 # SystempayBundle 
 
-Fork from : https://github.com/baptiste-dulac/SystempayBundle
-(My first fork try ;)
+Fork from : https://github.com/baptiste-dulac/SystempayBundle , I removed the Transaction entity to have a bundle working without update database.
 
 This bundle allows to implement a Payment Solution working with [SystemPay](https://paiement.systempay.fr/html/) for your symfony projet.
 This payment solution uses Systempay. Systempay is a payment gateway proposed by the following bank companies :
 * Banque Populaire (Cyberplus)
 * Caisse d'épargne (SPPlus)
-
-[![Total Downloads](https://poser.pugx.org/snowbaha/systempay-bundle/downloads.svg)](https://packagist.org/packages/snowbaha/systempay-bundle)
-[![Latest Stable Version](https://poser.pugx.org/snowbaha/systempay-bundle/v/stable.svg)](https://packagist.org/packages/snowbaha/systempay-bundle)
-
 
 ## Installation
 ### Step 1 : Import using Composer

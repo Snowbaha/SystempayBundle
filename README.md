@@ -1,6 +1,6 @@
 # SystempayBundle 
 
-Fork from : https://github.com/baptiste-dulac/SystempayBundle , I removed the Transaction entity to have a bundle working without update database.
+From the [FORK](https://github.com/baptiste-dulac/SystempayBundle), I removed the Transaction entity to have a bundle working without update database.
 
 This bundle allows to implement a Payment Solution working with [SystemPay](https://paiement.systempay.fr/html/) for your symfony projet.
 This payment solution uses Systempay. Systempay is a payment gateway proposed by the following bank companies :
